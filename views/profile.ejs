@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickChirp - Profile</title>
+  <link rel="icon" type="image/x-icon" href="/illustrations/favicon.ico">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 ">
+
+    <!-- Navbar -->
+    <nav class="bg-zinc-900 p-5">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-white text-3xl font-bold tracking-tight">
+                QuickChirp
+            </a>
+            <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="bg-blue-600 items-center text-center text-white max-w-screen-xl mx-auto justify-center p-2 items-center tracking-tight"
+  >Your Voice, Your Community, Your Platform</div>
+
+  <h2 class="text-2xl font-semibold text-white ml-14 mt-8 p-6 "> <span class="text-3xl tracking-tight">Hello 👋</span>
+    <br>
+     <%= user.name %> </h2>
+
+    <!-- Profile Section -->
+    <div class="max-w-2xl mx-auto mt-8 p-6 bg-zinc-800 shadow-lg rounded-lg" >
+        
+
+        <!-- Post Input -->
+        <form action="/post" method="POST" class="mt-6">
+            <textarea name="content" class="w-full p-3 border border-gray-300 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" rows="4" placeholder="What's on your mind?"></textarea>
+            <button type="submit" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
+                Post
+            </button>
+        </form>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="max-w-2xl mx-auto mt-8">
+       
+            <div class="bg-zinc-800 p-5 mb-4 shadow-lg rounded-lg">
+                <h3 class="text-lg tracking-tight text-blue-600">@username</h3>
+                <p class="text-white mt-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam exercitationem fugit tenetur velit perspiciatis repudiandae!</p>
+                <div class="mt-3 flex justify-between items-center">
+                    <button class="text-yellow-600 ">Edit</button>
+                    <button class="text-red-500 ">Like ❤️ </button>
+                </div>
+            </div>
+
+            
+
+    </div>
+
+</body>
+</html>
