@@ -9,13 +9,22 @@ const user = require('./models/user');
 app.set("view engine" ,"ejs");
 
 app.use(express.json());
+app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+
+
 
 app.get('/',(req,res)=>{
     res.render('index');
 
 })
+
+app.get('/landing',(req,res)=>{
+    res.render('landing');
+
+})
+
 
 app.get('/login',(req,res)=>{
     res.render('login');
