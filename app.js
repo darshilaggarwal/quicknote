@@ -4,6 +4,7 @@ const userModel = require('./models/user')
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const user = require('./models/user');
 
 app.set("view engine" ,"ejs");
 
@@ -52,7 +53,7 @@ app.post('/login', async (req,res)=>{
 
     bcrypt.compare(password, user.password , (err, result)=>{
         if (result) {
-            let token = jwt.sign({email:user.email}, "shshshsh");
+            let token = jwt.sign({email:user.email}, "shhhh");
             res.cookie("token" ,token);  
             res.send("you can login");
         } 
@@ -63,7 +64,27 @@ app.post('/login', async (req,res)=>{
 
 app.get("/logout" , (req,res)=>{
     res.cookie("token" ,"");  
-    res.redirect('/')
+    res.redirect('/');
 })
+
+app.get("/profile" , isLoggedin , (req,res)=>{
+   res.send("you are already logged in")
+})
+
+
+function isLoggedin(req, res, next) {
+    if (!req.cookies.token || req.cookies.token === "") {
+        res.send("You need to be logged in");
+    } else {
+        try {
+            let data = jwt.verify(req.cookies.token, "shhhh");
+            req.user = data;  
+            next();     
+        } catch (error) {
+            res.status(401).send("Invalid token");
+        }
+    }
+}
+
 
 app.listen(3000);
