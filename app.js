@@ -15,13 +15,18 @@ app.use(cookieParser());
 
 
 
+// app.get('/',(req,res)=>{
+//     res.render('index');
+
+// })
+
 app.get('/',(req,res)=>{
-    res.render('index');
+    res.render('landing');
 
 })
 
-app.get('/landing',(req,res)=>{
-    res.render('landing');
+app.get('/register',(req,res)=>{
+    res.render('register');
 
 })
 
