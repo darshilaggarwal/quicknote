@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     email : String ,
     age : Number ,
     posts: [{
-       type: mongoose.Schema.types.ObjectId, ref: 'post'   
+       type: mongoose.Schema.Types.ObjectId , ref: 'post'   
     }]
 });
 

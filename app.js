@@ -3,6 +3,7 @@ const app = express ();
 const userModel = require('./models/user')
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 app.set("view engine" ,"ejs");
 
@@ -29,7 +30,10 @@ app.post('/register', async (req,res)=>{
                 email ,
                 password: hash,
             })
-            res.send(createdUser);
+            
+            let token = jwt.sign({email: email} , "shhhh");
+            res.cookie ("token" , token);
+            res.send("you are registered");
         })
     })
 
