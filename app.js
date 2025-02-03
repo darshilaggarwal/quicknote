@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express ();
 const userModel = require('./models/user')
+const postModel = require('./models/post')
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const user = require('./models/user');
+
 
 app.set("view engine" ,"ejs");
 
@@ -46,7 +47,7 @@ app.post('/register', async (req,res)=>{
                 password: hash,
             })
             
-            let token = jwt.sign({email: email} , "shhhh");
+            let token = jwt.sign({email : email} , "shhhh");
             res.cookie ("token" , token);
             res.send("already logged in");
         })
@@ -80,12 +81,23 @@ app.get("/logout" , (req,res)=>{
 
 app.get("/profile" ,isLoggedin, async (req,res)=>{
     let user = await userModel.findOne({email : req.user.email});
-    console.log(user);
     res.render('profile' , {user});
 })
 
-app.post("/post" , (req,res)=>{
+app.post("/post" , isLoggedin ,async (req,res)=>{
+    let user = await userModel.findOne({email : req.user.email});
+    let {content} = req.body;
+    let post = await postModel.create({
+        user: user._id ,
+        content
+    });
+
+    user.posts.push(post._id);
+    await user.save();
+
     
+   res.redirect("profile")
+   
  })
 
 
