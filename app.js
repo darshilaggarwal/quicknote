@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path')
 // const multerconfig = require('./config/multer');
 const upload = require('./config/multer');
+// const { log } = require('console');
 // const { path } = require('framer-motion/client');
 
 
@@ -41,15 +42,25 @@ app.get('/test',(req,res)=>{
 
 })
 
-app.get('/upload',isLoggedin,(req,res)=>{
+app.get('/profile/upload',isLoggedin,(req,res)=>{
     res.render('editprofile');
 
 })
 
-app.post('/upload',upload.single("image"),(req,res)=>{
-    res.render('editprofile');
+app.post('/upload', isLoggedin, upload.single("image"), async (req, res) => { 
+    // Check if a file was uploaded
+    if (!req.file) {
+        return res.status(400).send("No file uploaded. Please select an image.");
+    }
 
-})
+    let user = await userModel.findOne({ email: req.user.email });
+    user.profilepic = req.file.filename;
+    await user.save();
+
+    console.log("Authenticated User:", req.user.email);
+    console.log(req.file);
+    res.redirect("profile");
+});
 
 
 
