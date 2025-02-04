@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+
+    <div class="bg-zinc-900 w-full h-screen text-white pl-10">
+
+        <a class="text-blue-500 inline-block mt-10 mb-10"
+         href="/">Go back to home</a>
+        
+         <h1 class="text-yellow-500 text-3xl mb-4"
+         >Edit file</h1>
+
+         <form action="/edit" method="POST">
+            <input class="block rounded-md bg-zinc-800 py-3 px-4 w-80 mb-4 "
+            type="text" placeholder="edit file name" name="filename" value="">
+            <textarea class="block rounded-md bg-zinc-800 py-3 px-4 w-1/2 mb-4"
+            placeholder="edit file text" name="filedata"></textarea>
+            <button class="px-3 py-1 bg-yellow-500 rounded-md"
+            >save changes</button>
+        </form>
+
+    
+    </div>
+    
+</body>
+</html>

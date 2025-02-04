@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad - PDF Download</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        textarea {
+            width: 80%;
+            height: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Notepad</h2>
+    <textarea id="noteArea" placeholder="Write your notes here..."></textarea>
+    <button id="downloadPDF">Download as PDF</button>
+
+    <script>
+        document.getElementById("downloadPDF").addEventListener("click", function() {
+            let text = document.getElementById("noteArea").value; // Get text from textarea
+            
+            if (text.trim() === "") {
+                alert("Write something before downloading!"); 
+                return;
+            }
+
+            // Load jsPDF library
+            const { jsPDF } = window.jspdf;
+            let doc = new jsPDF();
+
+            doc.setFont("helvetica", "normal"); // Set font
+            doc.setFontSize(12);
+            
+            let margin = 10;
+            let pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
+            let pageHeight = doc.internal.pageSize.getHeight() - margin * 2;
+
+            let splitText = doc.splitTextToSize(text, pageWidth); // Wrap text within PDF width
+            doc.text(splitText, margin, margin);
+
+            doc.save("my_note.pdf"); // Download as PDF
+        });
+    </script>
+
+</body>
+</html>

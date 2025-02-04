@@ -32,6 +32,17 @@ app.get('/login',(req,res)=>{
 
 })
 
+app.get('/test',(req,res)=>{
+    res.render('test');
+
+})
+
+app.get('/edit',(req,res)=>{
+    res.render('edit');
+
+})
+
+
 app.post('/register', async (req,res)=>{
     let{email , password , username , name , age } = req.body
     let user = await userModel.findOne({email});
@@ -49,7 +60,7 @@ app.post('/register', async (req,res)=>{
             
             let token = jwt.sign({email : email} , "shhhh");
             res.cookie ("token" , token);
-            res.send("already logged in");
+            res.redirect("profile");
         })
     })
 
