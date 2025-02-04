@@ -13,21 +13,33 @@
     <!-- Navbar -->
     <nav class="bg-zinc-900 p-5">
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
-            <a href="./" class="text-white text-3xl font-bold tracking-tight">
-                QuickChirp
+            <a href="./" class="text-white text-3xl tracking-tighter">
+                QuickNote
             </a>
-            <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-                Logout
-            </a>
+            <div class="flex gap-10">
+                <a href="/upload" class="bg-yellow-500 text-white px-2 py-2 rounded-lg hover:bg-yellow-700 text-s">
+                    Edit Profile
+                </a>
+                <a href="/logout" class="bg-red-500 text-white px-2 py-2 rounded-lg hover:bg-red-700 text-s">
+                    Logout
+                </a>
+            </div>
+            
         </div>
     </nav>
 
     <div class="bg-blue-600 items-center text-center text-white max-w-screen-xl mx-auto justify-center p-2 items-center tracking-tight"
-  >Your Voice, Your Community, Your Platform</div>
+  ></div>
 
-  <h2 class="text-2xl font-semibold text-white ml-14 mt-8 p-6 "> <span class="text-3xl tracking-tight">Hello 👋</span>
-    <br>
-     <%= user.name %> </h2>
+  <div class="flex ml-14 mt-8 p-6  ">
+    <div class="h-18 w-20 bg-red-500 rounded-lg mr-5 overflow-hidden ">
+        <img class="h-18 w-20 object-cover " src="/uploads/<%= user.profilepic %>" alt="">
+    </div>
+    <h2 class="text-2xl tracking-tight text-white  "> <span class="text-3xl tracking-tight">Hello 👋</span>
+        <br>
+         <%= user.name %> </h2>
+  </div>
+  
 
     <!-- Profile Section -->
     <div class="max-w-2xl mx-auto mt-8 p-6 bg-zinc-800 shadow-lg rounded-lg" >
@@ -35,7 +47,7 @@
 
         <!-- Post Input -->
         <form action="/post" method="post" class="mt-6">
-            <textarea name="content" class="w-full p-3 border border-gray-300 text-white bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" rows="4" placeholder="What's on your mind?"></textarea>
+            <textarea name="content" class="w-full p-3 border border-gray-300 text-white bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" rows="4" required="true" placeholder="What's on your mind?"></textarea>
             <button type="submit" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
                 Post
             </button>

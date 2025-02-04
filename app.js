@@ -5,12 +5,16 @@ const postModel = require('./models/post')
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const path = require('path')
+// const multerconfig = require('./config/multer');
+const upload = require('./config/multer');
+// const { path } = require('framer-motion/client');
 
 
 app.set("view engine" ,"ejs");
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
@@ -37,10 +41,17 @@ app.get('/test',(req,res)=>{
 
 })
 
-app.get('/edit',(req,res)=>{
-    res.render('edit');
+app.get('/upload',isLoggedin,(req,res)=>{
+    res.render('editprofile');
 
 })
+
+app.post('/upload',upload.single("image"),(req,res)=>{
+    res.render('editprofile');
+
+})
+
+
 
 
 app.post('/register', async (req,res)=>{

@@ -8,29 +8,42 @@
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen bg-zinc-900">
-    <div class="bg-zinc-800  p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center text-white mb-4 tracking-tight">LOGIN USER</h2>
-        <form action="/login" method="post" class="space-y-4 ">
-           
-            <div>
-                <label class="block text-white">Email</label>
-                <input type="email" name="email" class="w-full p-2 border border-gray-300 rounded-lg bg-transparent text-white" required>
-            </div>
-
-            <div>
-                <label class="block text-white">Password</label>
-                <input type="password" name="password" class="w-full p-2 border border-gray-300 rounded-lg bg-transparent text-white" required>
-            </div>
+<body class="bg-zinc-900">
+    <nav class="bg-zinc-900 p-5">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-white text-3xl tracking-tighter">
+                QuickNote
+            </a>
             
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700">
-                login
-            </button>
-        </form>
-        <div class="flex flex-wrap mt-4 gap-3 justify-center ">
-            <p class="text-center text-white tracking-tight"
-            >Don't have an account ?</p>
-            <a  class="text-center text-blue-500 tracking-tight" href="/register">Register</a>
+        </div>
+    </nav>
+    <div class="bg-blue-600 items-center text-center text-white max-w-screen-xl mx-auto justify-center p-2 items-center tracking-tight"
+  ></div>
+
+    <div class="flex justify-center items-center min-h-screen bg-zinc-900">
+        <div class="bg-zinc-800  p-6 rounded-lg shadow-lg w-full max-w-md mr-4 ml-4 ">
+            <h2 class="text-2xl text-center text-white mb-4 tracking-tight">LOGIN USER</h2>
+            <form action="/login" method="post" class="space-y-4 ">
+               
+                <div>
+                    <label class="block text-white">Email</label>
+                    <input type="email" name="email" class="w-full p-2 border border-gray-300 rounded-lg bg-transparent text-white" required>
+                </div>
+    
+                <div>
+                    <label class="block text-white">Password</label>
+                    <input type="password" name="password" class="w-full p-2 border border-gray-300 rounded-lg bg-transparent text-white" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700">
+                    login
+                </button>
+            </form>
+            <div class="flex flex-wrap mt-4 gap-3 justify-center ">
+                <p class="text-center text-white tracking-tight"
+                >Don't have an account ?</p>
+                <a  class="text-center text-blue-500 tracking-tight" href="/register">Register</a>
+            </div>
         </div>
     </div>
 </body>
