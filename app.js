@@ -129,9 +129,10 @@ app.get("/profile" ,isLoggedin, async (req,res)=>{
 
 app.post("/post" , isLoggedin ,async (req,res)=>{
     let user = await userModel.findOne({email : req.user.email});
-    let {content} = req.body;
+    let {content , title} = req.body;
     let post = await postModel.create({
         user: user._id ,
+        title,
         content
     });
 
@@ -159,6 +160,24 @@ function isLoggedin(req, res, next) {
         }
     }
 }
+
+app.post("/delete/:postId", isLoggedin, async (req, res) => {
+    try {
+        let user = await userModel.findOne({ email: req.user.email });
+
+        const postId = req.params.postId;
+
+        await postModel.findByIdAndDelete(postId);
+
+        user.posts = user.posts.filter(post => post.toString() !== postId);
+        await user.save();
+
+        res.redirect("/notes");
+    } catch (err) {
+        console.error("Error deleting post:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 
 app.listen(3000);
