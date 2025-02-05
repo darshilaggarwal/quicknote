@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>View Post</title>
+</head>
+<body class="bg-zinc-900 text-white">
+    <nav class="bg-zinc-900 p-5">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-white text-3xl tracking-tighter">QuickNote</a>
+            <div class="flex gap-10">
+                <a href="/profile/" class="bg-blue-500 text-white px-2 py-2 rounded-lg hover:bg-blue-700 text-s">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-blue-600 items-center text-center text-white max-w-screen-xl mx-auto justify-center p-2 items-center tracking-tight"
+  ></div>
+
+  <div class="max-w-screen-md mx-auto mt-10 p-6 bg-zinc-800 rounded-lg shadow-lg md:p-8 lg:p-10 ml-5 mr-5 md:ml-20">
+    <h2 class="text-2xl font-semibold text-white sm:text-xl md:text-2xl lg:text-3xl"><%= post.title %></h2>
+    <p class="mt-4 text-gray-300 text-sm sm:text-base md:text-lg"><%= post.content %></p>
+    
+    
+</div>
+
+</body>
+</html>

@@ -179,5 +179,19 @@ app.post("/delete/:postId", isLoggedin, async (req, res) => {
     }
 });
 
+app.get("/post/:postId", isLoggedin, async (req, res) => {
+    try {
+        const post = await postModel.findById(req.params.postId);
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+        res.render("viewPost", { post }); 
+    } catch (err) {
+        console.error("Error fetching post:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 
 app.listen(3000);
