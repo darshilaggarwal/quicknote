@@ -31,7 +31,7 @@
 
 
                     <div class="mt-3 flex justify-between items-center">
-                        <a href="/edit" class="text-yellow-600">Edit</a>
+                        <a href="/edit/<%= post._id %>" class="text-yellow-600">Edit</a>
                         <a href="/post/<%= post._id %>" class="text-green-500 hover:underline">View</a>
                         <form action="/delete/<%= post._id %>" method="POST">
                             <button type="submit" class="text-red-600 hover:underline">Delete</button>

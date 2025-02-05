@@ -192,6 +192,37 @@ app.get("/post/:postId", isLoggedin, async (req, res) => {
     }
 });
 
+app.get('/edit/:postId', isLoggedin, async (req, res) => {
+    const postId = req.params.postId;
+    const post = await postModel.findById(postId);
+
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+
+    res.render('editPost', { post });
+});
+
+app.post('/edit/:postId', isLoggedin, async (req, res) => {
+    const postId = req.params.postId;
+    const { title, content } = req.body;
+
+    const post = await postModel.findById(postId);
+
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+
+    // Update the post with the new data
+    post.title = title;
+    post.content = content;
+    
+    await post.save();
+    
+    // Redirect back to profile or view the updated post
+    res.redirect('/notes');
+});
+
 
 
 app.listen(3000);
