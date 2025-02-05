@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Document</title>
 </head>
-<body>
+<body class="bg-zinc-900">
 
-    <form action="/upload" method="post" enctype="multipart/form-data" autocomplete="off">
-        <input type="file" name="image">
-        <input type="submit" value="upload file">
-    </form>
+    <nav class="bg-zinc-900 p-5">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-white text-3xl tracking-tighter">
+                QuickNote
+            </a>
+            
+        </div>
+    </nav>
+    <div class="bg-blue-600 items-center text-center text-white max-w-screen-xl mx-auto justify-center p-2 items-center tracking-tight"
+  ></div>
+
+    <h2 class="text-yellow-500 text-3xl p-6 ml-14 mt-10 tracking-tight">Edit Porfile Picture</h2>
+
+    <div class="p-6 ml-14">
+        <form action="/upload" method="post" enctype="multipart/form-data" autocomplete="off">
+            <input class="text-white" type="file" name="image">
+            <input class="bg-blue-500 p-1 rounded-lg" type="submit" value="upload file" >
+        </form>
+    </div>
+
+    <h2 class="text-yellow-500 text-3xl p-6 ml-14 mt-10 tracking-tight">Edit Porfile Details</h2>
+
+
+    
     
 </body>
 </html>

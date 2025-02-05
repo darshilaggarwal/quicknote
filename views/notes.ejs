@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>QuickNote</title>
+    <style>
+        .draggable {
+            cursor: grab;
+        }
+        .dragging {
+            position: fixed;
+            cursor: grabbing;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-zinc-900">
+    <!-- Navbar -->
+    <nav class="bg-zinc-900 p-5">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <a href="./" class="text-white text-3xl tracking-tighter">QuickNote</a>
+            <div class="flex gap-10">
+                <a href="/profile/" class="bg-blue-500 text-white px-2 py-2 rounded-lg hover:bg-blue-700 text-s">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Info Banner -->
+    <div class="bg-blue-600 text-center text-white max-w-screen-xl mx-auto p-2 tracking-tight"></div>
+
+    <!-- Card Container -->
+    <div class="max-w-screen-xl mx-auto p-5">
+        <div class="flex flex-wrap gap-5 justify-center">
+            <% user.posts.reverse().forEach((post, index) => { %>
+                <div class="bg-zinc-800 p-5 shadow-lg rounded-lg w-80 sm:w-64 md:w-72 lg:w-80 draggable"
+                     id="card-<%= index %>">
+                    <h3 class="text-lg tracking-tight text-blue-600">@<%= user.username %></h3>
+                    <p class="text-white mt-2"><%= post.content %></p>
+                    <div class="mt-3 flex justify-between items-center">
+                        <a href="/edit" class="text-yellow-600">Edit</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- JavaScript for Isolated Draggable Cards -->
+    <script>
+        document.querySelectorAll(".draggable").forEach(card => {
+            let isDragging = false, offsetX = 0, offsetY = 0;
+
+            card.addEventListener("mousedown", (e) => {
+                isDragging = true;
+                offsetX = e.clientX - card.getBoundingClientRect().left;
+                offsetY = e.clientY - card.getBoundingClientRect().top;
+
+                // Set position fixed so only this card moves
+                card.classList.add("dragging");
+                card.style.position = "fixed";
+                card.style.left = `${e.clientX - offsetX}px`;
+                card.style.top = `${e.clientY - offsetY}px`;
+            });
+
+            document.addEventListener("mousemove", (e) => {
+                if (isDragging) {
+                    card.style.left = `${e.clientX - offsetX}px`;
+                    card.style.top = `${e.clientY - offsetY}px`;
+                }
+            });
+
+            document.addEventListener("mouseup", () => {
+                isDragging = false;
+                card.classList.remove("dragging");
+            });
+        });
+    </script>
+</body>
+</html>

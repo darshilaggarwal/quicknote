@@ -31,6 +31,14 @@ app.get('/register',(req,res)=>{
 
 })
 
+app.get('/notes',  isLoggedin , async(req,res)=>{
+    let user = await userModel.findOne({email : req.user.email}).populate("posts");
+    
+    res.render('notes' , {user});
+
+})
+
+
 
 app.get('/login',(req,res)=>{
     res.render('login');
@@ -57,9 +65,10 @@ app.post('/upload', isLoggedin, upload.single("image"), async (req, res) => {
     user.profilepic = req.file.filename;
     await user.save();
 
-    console.log("Authenticated User:", req.user.email);
-    console.log(req.file);
     res.redirect("profile");
+
+
+
 });
 
 

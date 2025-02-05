@@ -6,6 +6,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/quickchirp')
 
 const postSchema = mongoose.Schema({
 
+    title :{
+        type : mongoose.Schema.Types.ObjectId , ref: "title"
+
+    },
+
     user: {
         type : mongoose.Schema.Types.ObjectId , ref: "user"
     },
@@ -16,10 +21,8 @@ const postSchema = mongoose.Schema({
     },
     content : String ,
 
-    likes : [{
-        type : mongoose.Schema.Types.ObjectId , ref: "user"
-    }]
     
+
 });
 
 module.exports = mongoose.model("post" , postSchema);
