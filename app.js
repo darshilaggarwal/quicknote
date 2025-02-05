@@ -213,13 +213,13 @@ app.post('/edit/:postId', isLoggedin, async (req, res) => {
         return res.status(404).send('Post not found');
     }
 
-    // Update the post with the new data
+
     post.title = title;
     post.content = content;
     
     await post.save();
     
-    // Redirect back to profile or view the updated post
+
     res.redirect('/notes');
 });
 
