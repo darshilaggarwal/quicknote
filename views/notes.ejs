@@ -27,14 +27,14 @@
             <% user.posts.reverse().forEach((post, index) => { %>
                 <div class="bg-zinc-800 p-5 shadow-lg rounded-lg w-80 sm:w-64 md:w-72 lg:w-80 draggable"
                      id="card-<%= index %>">
-                     <h2 class="text-white font-semibold mt-2"><%= post.title %></h2> <!-- Title -->
+                     <h2 class="text-white text-xl tracking-tight mt-2"><%= post.title %></h2> <!-- Title -->
 
 
                     <div class="mt-3 flex justify-between items-center">
-                        <a href="/edit/<%= post._id %>" class="text-yellow-600">Edit</a>
-                        <a href="/post/<%= post._id %>" class="text-green-500 hover:underline">View</a>
+                        <a href="/edit/<%= post._id %>" class="text-yellow-600 tracking-tight">Edit</a>
+                        <a href="/post/<%= post._id %>" class="text-green-600 tracking-tight ">View</a>
                         <form action="/delete/<%= post._id %>" method="POST">
-                            <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                            <button type="submit" class="text-red-600 tracking-tight ">Delete</button>
                         </form>
                         
                     </div>
