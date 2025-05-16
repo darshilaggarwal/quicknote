@@ -179,7 +179,7 @@ app.get("/post/:postId", isLoggedin, async (req, res) => {
         if (!post) {
             return res.status(404).send("Post not found");
         }
-        res.render("viewPost", { post });
+        res.render("viewpost", { post });
     } catch (err) {
         console.error("Error fetching post:", err);
         res.status(500).send("Internal Server Error");
@@ -194,7 +194,7 @@ app.get('/edit/:postId', isLoggedin, async (req, res) => {
         return res.status(404).send('Post not found');
     }
 
-    res.render('editPost', { post });
+    res.render('editpost', { post });
 });
 
 app.post('/edit/:postId', isLoggedin, async (req, res) => {
