@@ -8,9 +8,15 @@ const jwt = require('jsonwebtoken');
 const path = require('path')
 // const multerconfig = require('./config/multer');
 const upload = require('./config/multer');
-// const { log } = require('console');
-// const { path } = require('framer-motion/client');
+const connectDB = require('./config/database');
+require('dotenv').config();
 
+// Connect to MongoDB Atlas
+connectDB();
+
+// Environment variables
+const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'shhhh'; // Default secret for development
 
 app.set("view engine", "ejs");
 
@@ -18,6 +24,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Create uploads directory if it doesn't exist
+const fs = require('fs');
+const uploadsDir = path.join(__dirname, 'public/uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 app.get('/', (req, res) => {
     res.render('landing');
@@ -69,7 +82,7 @@ app.post('/register', async (req, res) => {
     let user = await userModel.findOne({ email });
     if (user) return res.status(500).send("user already registered");
 
-        bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {
             let createdUser = await userModel.create({
                 username,
@@ -79,7 +92,7 @@ app.post('/register', async (req, res) => {
                 password: hash,
             })
 
-            let token = jwt.sign({ email: email }, "shhhh");
+            let token = jwt.sign({ email: email }, JWT_SECRET);
             res.cookie("token", token);
             res.redirect("profile");
         })
@@ -94,7 +107,7 @@ app.post('/login', async (req, res) => {
     bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
 
-            let token = jwt.sign({ email: user.email }, "shhhh");
+            let token = jwt.sign({ email: user.email }, JWT_SECRET);
             res.cookie("token", token);
             res.status(200).redirect("profile");
 
@@ -133,7 +146,7 @@ function isLoggedin(req, res, next) {
         res.redirect("/");
     } else {
         try {
-            let data = jwt.verify(req.cookies.token, "shhhh");
+            let data = jwt.verify(req.cookies.token, JWT_SECRET);
             req.user = data;
             next();
         } catch (error) {
@@ -202,17 +215,15 @@ app.post('/edit/:postId', isLoggedin, async (req, res) => {
     res.redirect('/notes');
 });
 
-
-(
-    async () => {
-        try {
-            app.listen(3000);
-            console.log("Server started on port 3000");
-        } catch (error) {
-            console.error("Error starting server:", error);
-            process.exit(1);
-        }
+// Update server startup
+(async () => {
+    try {
+        app.listen(PORT);
+        console.log(`Server started on port ${PORT}`);
+    } catch (error) {
+        console.error("Error starting server:", error);
+        process.exit(1);
     }
-)()
+})()
 
 module.exports = app;

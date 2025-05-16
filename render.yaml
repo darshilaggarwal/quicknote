@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: quicknote
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        value: mongodb+srv://darshilaggarwal55:abcdefgh@cluster0.tfvjenr.mongodb.net/quicknote?retryWrites=true&w=majority&appName=Cluster0
+    healthCheckPath: / 
